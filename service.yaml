@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-sql-svc
+  labels:
+    app: sql-test
+spec:
+  selector:
+    pod-label: sql-test-pods
+  ports:
+  - protocol: TCP
+    port: 8080
+
+#
+# Now we need a service for the external database
+# my local server is named 'sds-server1' and the code used that in the 
+# mysql connect string. 
+#
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sds-server1
+  labels:
+    app: sds-server1
+spec:
+  ports:
+  - protocol: TCP
+    port: 3306
+
+#
+# Now the endpoint needs to be established.
+# Since the endpoint is outside the cluster its ip is listed here.
+#
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: sds-server1
+subsets:
+- addresses:
+  - ip: 192.168.1.89
+  ports:
+  - port: 3306

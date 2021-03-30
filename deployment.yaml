@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-sql
+  labels:
+    app: sql-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sql-test
+      pod-label: sql-test-pods
+  template:
+    metadata:
+      labels: 
+        app: sql-test
+        pod-label: sql-test-pods
+    spec:
+      containers:
+        - name: rest-sql
+          image: localhost:32000/simple_rest_sql:registry
+          ports:
+          - containerPort: 8080
