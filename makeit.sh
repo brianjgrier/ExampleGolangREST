@@ -2,6 +2,7 @@
 
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags netgo -ldflags '-w -extldflags "-static"' -o main .
 
-docker build -t sds-server1:32000/simple_rest_sql:registry . --no-cache -f Dockerfile
+docker build -t brianjgrier/simple_rest_sql:latest . --no-cache -f Dockerfile
 
-docker push sds-server1:32000/simple_rest_sql
+docker push brianjgrier/simple_rest_sql:latest
+

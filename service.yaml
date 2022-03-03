@@ -1,3 +1,4 @@
+#
 ---
 apiVersion: v1
 kind: Service
@@ -6,11 +7,13 @@ metadata:
   labels:
     app: sql-test
 spec:
-  selector:
+  type: LoadBalancer
+  selector: 
     pod-label: sql-test-pods
   ports:
   - protocol: TCP
     port: 8080
+
 
 #
 # Now we need a service for the external database
@@ -21,9 +24,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sds-server1
-  labels:
-    app: sds-server1
+  name: mysqldb
+  labels: 
+    app: mysqldb
 spec:
   ports:
   - protocol: TCP
@@ -37,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: sds-server1
+  name: mysqldb
 subsets:
 - addresses:
   - ip: 192.168.1.89

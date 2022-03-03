@@ -27,7 +27,8 @@ func main() {
 
 	fmt.Println("Rest to SQL example @", myIP)
 
-	myDB, dbConnErr = sql.Open("mysql", "golang-test:test-golang@tcp(sds-server1:3306)/golang_rest_sql_test")
+//	myDB, dbConnErr = sql.Open("mysql", "golang-test:test-golang@tcp(sds-server1:3306)/golang_rest_sql_test")
+	myDB, dbConnErr = sql.Open("mysql", "golang-test:test-golang@tcp(mysqldb:3306)/golang_rest_sql_test")
 	if dbConnErr != nil {
 		fmt.Println("Cannot connect to DB using only log statements")
 		//panic(err.Error())
